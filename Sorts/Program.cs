@@ -17,14 +17,14 @@ namespace Sorts
 				4
 			};
 
-			var test = TopDownMergeSort(firstList);
+			var test = TopDownMergeSortList(firstList);
 
             test.ForEach(Console.WriteLine);
 
 			Console.ReadLine();
         }
 
-		public static List<int> TopDownMergeSort(List<int> list)
+		public static List<int> TopDownMergeSortList(List<int> list)
 		{
 			if (list.Count <= 1)
 			{
@@ -48,9 +48,11 @@ namespace Sorts
 				}
 			}
 
-			leftSide = TopDownMergeSort(leftSide);
-			rightSide = TopDownMergeSort(rightSide);
+			//Recursively keep splitting the smaller lists
+			leftSide = TopDownMergeSortList(leftSide);
+			rightSide = TopDownMergeSortList(rightSide);
 
+			//Merge each iteration
 			return Merge(leftSide, rightSide);
 		}
 
@@ -58,6 +60,7 @@ namespace Sorts
 		{
 			var finalList = new List<int>();
 
+			//Compare the first element is each list and the lowest to the new list
 			while (firstList.Count > 0 && secondList.Count > 0)
 			{
 				if (firstList.First() <= secondList.First())
@@ -72,12 +75,14 @@ namespace Sorts
 				}
 			}
 
+			//Any left over from the first list means it was a bigger array
 			while (firstList.Count > 0)
 			{
 				finalList.Add(firstList.First());
 				firstList.Remove(firstList.First());
 			}
 
+			//Any left over from the second list means it was a bigger array
 			while (secondList.Count > 0)
 			{
 				finalList.Add(secondList.First());
@@ -87,7 +92,7 @@ namespace Sorts
 			return finalList;
 		}
 
-		public static List<int> BottomUpMergeSort(List<int> list)
+		public static List<int> TopDownMergeSortArray(List<int> list)
 		{
 			return list;
 		}
