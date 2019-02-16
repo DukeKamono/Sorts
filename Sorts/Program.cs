@@ -14,6 +14,7 @@ namespace Sorts
 				3,
 				2,
 				1,
+				5,
 				4
 			};
 
@@ -21,11 +22,12 @@ namespace Sorts
 
             listResult.ForEach(Console.WriteLine);
 
-			int[] firstArray = new int[]
+			double[] firstArray = new double[]
 			{
 				3,
 				2,
 				1,
+				5,
 				4
 			};
 
@@ -40,7 +42,7 @@ namespace Sorts
 		{
 			if (list.Count <= 1)
 			{
-				//There is only one item in this list.
+				//There is one/no item in this list.
 				return list;
 			}
 
@@ -104,14 +106,84 @@ namespace Sorts
 			return finalList;
 		}
 
-		public static int[] TopDownMergeSort(int[] array)
+		public static double[] TopDownMergeSort(double[] array)
 		{
-			return array;
+			//Array of size 1 or empty.
+			if (array.Length <= 1)
+			{
+				return array;
+			}
+
+			var halfOfArrayIndex = array.Length / 2;
+			var leftSide = new double[halfOfArrayIndex];
+			var rightSide = new double[array.Length - halfOfArrayIndex];
+			var leftCounter = 0;
+			var rightCounter = 0;
+
+			//Split the array to two smaller arrays
+			for (var i = 0; i < array.Length; i++)
+			{
+				if (i < halfOfArrayIndex)
+				{
+					leftSide[leftCounter] = array[i];
+					leftCounter++;
+				}
+				else
+				{
+					rightSide[rightCounter] = array[i];
+					rightCounter++;
+				}
+			}
+
+			//Recursively keep splitting the smaller arrays
+			leftSide = TopDownMergeSort(leftSide);
+			rightSide = TopDownMergeSort(rightSide);
+
+			//Merge each iteration
+			return Merge(leftSide, rightSide);
 		}
 
-		public static int[] Merge(int[] firstArray, int[] secondArray)
+		public static double[] Merge(double[] firstArray, double[] secondArray)
 		{
-			var finalArray = new int[2];
+			var finalArray = new double[firstArray.Length + secondArray.Length];
+			var firstArrayCounter = 0;
+			var secondArrayCounter = 0;
+
+			//Compare the first element is each array and the lowest to the new array
+			for (var i = 0; i < finalArray.Length; i++)
+			{
+				if (firstArray.Length > firstArrayCounter && secondArray.Length > secondArrayCounter)
+				{
+					if (firstArray[firstArrayCounter] <= secondArray[secondArrayCounter])
+					{
+						finalArray[i] = firstArray[firstArrayCounter];
+						firstArrayCounter++;
+						continue;
+					}
+					else
+					{
+						finalArray[i] = secondArray[secondArrayCounter];
+						secondArrayCounter++;
+						continue;
+					}
+				}
+
+				//Any left over from the first array means it was a bigger array
+				if (firstArray.Length > firstArrayCounter && secondArray.Length <= secondArrayCounter)
+				{
+					finalArray[i] = firstArray[firstArrayCounter];
+					firstArrayCounter++;
+					continue;
+				}
+
+				//Any left over from the second array means it was a bigger array
+				if (firstArray.Length <= firstArrayCounter && secondArray.Length > secondArrayCounter)
+				{
+					finalArray[i] = secondArray[secondArrayCounter];
+					secondArrayCounter++;
+					continue;
+				}
+			}
 
 			return finalArray;
 		}
