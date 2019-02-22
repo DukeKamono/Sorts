@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Numerics;
 
 namespace Sorts
 {
-    class MergeSort
+	class MergeSort
     {
 		//Using a list and merge sorting it.
 		public List<int> TopDownMergeSort(List<int> list)
@@ -78,8 +76,8 @@ namespace Sorts
 			return finalList;
 		}
 
-		//Merge sort but using an array of doubles. So we can test really small numbers
-		public double[] TopDownMergeSort(double[] array)
+		//Merge sort but using an array of ints. So we can test really small numbers
+		public int[] TopDownMergeSort(int[] array)
 		{
 			//Array of size 1 or empty.
 			if (array.Length <= 1)
@@ -88,8 +86,8 @@ namespace Sorts
 			}
 
 			var halfOfArrayIndex = array.Length / 2;
-			var leftSide = new double[halfOfArrayIndex];
-			var rightSide = new double[array.Length - halfOfArrayIndex];
+			var leftSide = new int[halfOfArrayIndex];
+			var rightSide = new int[array.Length - halfOfArrayIndex];
 			var leftCounter = 0;
 			var rightCounter = 0;
 
@@ -116,10 +114,10 @@ namespace Sorts
 			return Merge(leftSide, rightSide);
 		}
 
-		//Merge function for the array of doubles
-		public double[] Merge(double[] firstArray, double[] secondArray)
+		//Merge function for the array of ints
+		public int[] Merge(int[] firstArray, int[] secondArray)
 		{
-			var finalArray = new double[firstArray.Length + secondArray.Length];
+			var finalArray = new int[firstArray.Length + secondArray.Length];
 			var firstArrayCounter = 0;
 			var secondArrayCounter = 0;
 

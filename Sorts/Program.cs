@@ -10,50 +10,37 @@ namespace Sorts
 		static void Main(string[] args)
 		{
 			MergeSort mergeSort = new MergeSort();
+			SetupLists setup = new SetupLists();
 
-			List<int> firstList = new List<int>
+			do
 			{
-				3,
-				2,
-				1,
-				5,
-				4
-			};
+				setup.Questions();
 
-			var listResult = mergeSort.TopDownMergeSort(firstList);
+				//var result = mergeSort.TopDownMergeSort();
 
-			listResult.ForEach(Console.WriteLine);
+				//foreach (var number in result)
+				//{
+				//	Console.WriteLine(number);
+				//}
 
-			double[] firstArray = new double[]
+			} while(Restart());
+		}
+
+		//Asks the user if they want to restart the App.
+		public static bool Restart()
+		{
+			Console.WriteLine("Do you want to restart? Yes/No");
+			var input = Console.ReadLine();
+			if (input.Equals("No", StringComparison.OrdinalIgnoreCase))
 			{
-				3,
-				2,
-				1,
-				5,
-				4
-			};
-
-			var arrayResult = mergeSort.TopDownMergeSort(firstArray);
-
-			arrayResult.ToList().ForEach(Console.WriteLine);
-
-			BigInteger[] bigIntegerArray = new BigInteger[]
+				return false;
+			}
+			else if (input.Equals("Yes", StringComparison.OrdinalIgnoreCase))
 			{
-				3000000,
-				2000000,
-				1000000,
-				5000000,
-				4000000
-			};
-
-			var bigIntegerArrayResult = mergeSort.TopDownMergeSort(bigIntegerArray);
-
-			foreach (var number in bigIntegerArrayResult)
-			{
-				Console.WriteLine(number);
+				return true;
 			}
 
-			Console.ReadLine();
+			return Restart();
 		}
 	}
 }
