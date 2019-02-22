@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Sorts
@@ -19,7 +19,7 @@ namespace Sorts
 				//Takes the answers to get the right list.
 				setup.Setup(answers);
 
-				//****Maybe instead of returning the list and sending to file, we will return the time it took and return that to the file?
+				//Update the MergeSort Object with the values from the SetupLists object
 				mergeSort.RunMergeSort(setup);
 				Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
 				Console.WriteLine("Results:");
