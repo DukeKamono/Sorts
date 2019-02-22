@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
 
 namespace Sorts
 {
@@ -11,17 +9,32 @@ namespace Sorts
 		{
 			MergeSort mergeSort = new MergeSort();
 			SetupLists setup = new SetupLists();
+			Answers answers = new Answers();
+			var resultList = new List<string>();
 
 			do
 			{
-				setup.Questions();
+				//All the qestions for the console app.
+				answers.Questions();
+				//Takes the answers to get the right list.
+				setup.Setup(answers);
 
-				//var result = mergeSort.TopDownMergeSort();
+				//****Maybe instead of returning the list and sending to file, we will return the time it took and return that to the file?
+				mergeSort.RunMergeSort(setup);
+				Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
+				Console.WriteLine("Results:");
 
-				//foreach (var number in result)
-				//{
-				//	Console.WriteLine(number);
-				//}
+				resultList.Add($"Time: {mergeSort.ResultTime}");
+				resultList.Add("Results:");
+				foreach (var number in mergeSort.ResultList)
+				{
+					resultList.Add(number.ToString());
+					Console.WriteLine(number);
+				}
+
+				//Save to file Sorts\bin\Debug
+				var FilePath = @"..\Results" + DateTime.Now.ToString("yyyyddM--HH-mm-ss") + ".txt";
+				System.IO.File.WriteAllLines(FilePath, resultList);
 
 			} while(Restart());
 		}
@@ -29,7 +42,7 @@ namespace Sorts
 		//Asks the user if they want to restart the App.
 		public static bool Restart()
 		{
-			Console.WriteLine("Do you want to restart? Yes/No");
+			Console.WriteLine("\nDo you want to restart? Yes/No \n");
 			var input = Console.ReadLine();
 			if (input.Equals("No", StringComparison.OrdinalIgnoreCase))
 			{

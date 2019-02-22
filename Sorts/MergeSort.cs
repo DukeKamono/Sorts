@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -6,6 +7,37 @@ namespace Sorts
 {
 	class MergeSort
     {
+		public List<int> ResultList;
+		public TimeSpan ResultTime;
+
+		//Sets up the Properties for the MergeSort object
+		public void RunMergeSort(SetupLists setup)
+		{
+			if (setup.isArray)
+			{
+				//Start time here
+				var startTime = DateTime.Now;
+				var result = TopDownMergeSort(setup.currentArray);
+				var endTime = DateTime.Now - startTime;
+				//End time here
+
+				ResultList = result.ToList();
+				ResultTime = endTime;
+			}
+			else
+			{
+				var turnToList = setup.currentArray.ToList();
+				//Start time here
+				var startTime = DateTime.Now;
+				var result = TopDownMergeSort(turnToList);
+				var endTime = DateTime.Now - startTime;
+				//End time here
+
+				ResultList = result;
+				ResultTime = endTime;
+			}
+		}
+
 		//Using a list and merge sorting it.
 		public List<int> TopDownMergeSort(List<int> list)
 		{

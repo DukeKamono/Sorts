@@ -6,93 +6,45 @@ namespace Sorts
 {
 	class SetupLists
     {
-		private enum InputTypes
+		public int[] currentArray;
+		public bool isArray;
+
+		public void Setup(Answers answers)
 		{
-			InOrder,
-			ReverseOrder,
-			Random,
-			RandomManyDuplicates
-
-		}
-
-		public SetupLists()
-		{
-
-		}
-
-		public void Questions()
-		{
-			var typeInput = string.Empty;
-			while (string.IsNullOrWhiteSpace(typeInput))
+			try
 			{
-				Console.WriteLine("What would you like to see?");
-				foreach (var type in Enum.GetValues(typeof(InputTypes)))
-				{
-					Console.WriteLine(type);
-				}
-				typeInput = Console.ReadLine();
+				isArray = answers.InputList == "Array" ? true : false;
 
-				typeInput = typeInput.Equals(nameof(InputTypes.InOrder), StringComparison.OrdinalIgnoreCase) ? "InOrder"
-					: typeInput.Equals(nameof(InputTypes.ReverseOrder), StringComparison.OrdinalIgnoreCase) ? "ReverseOrder"
-					: typeInput.Equals(nameof(InputTypes.Random), StringComparison.OrdinalIgnoreCase) ? "Random"
-					: typeInput.Equals(nameof(InputTypes.RandomManyDuplicates), StringComparison.OrdinalIgnoreCase) ? "RandomManyDuplicates"
-					: string.Empty;
-
-				if (string.IsNullOrWhiteSpace(typeInput))
+				switch (answers.InputTypes)
 				{
-					Console.Write("Try again. ");
+					case InputTypes.InOrder:
+						currentArray = GetInOrder(answers.InputSize);
+						break;
+					case InputTypes.ReverseOrder:
+						currentArray = GetReverseOrder(answers.InputSize);
+						break;
+					case InputTypes.Random:
+						currentArray = GetRandom(answers.InputSize);
+						break;
+					case InputTypes.RandomManyDuplicates:
+						currentArray = GetRandomManyDuplicates(answers.InputSize);
+						break;
+					default:
+						throw new Exception("Answer input is wrong.");
 				}
 			}
-
-			var listInput = string.Empty;
-			while (string.IsNullOrWhiteSpace(listInput))
+			catch (Exception ex)
 			{
-				Console.WriteLine("Do you want a List or an Array? List/Array");
-				listInput = Console.ReadLine();
-
-				listInput = listInput.Equals("List", StringComparison.OrdinalIgnoreCase) ? "List"
-					: listInput.Equals("Array", StringComparison.OrdinalIgnoreCase) ? "Array"
-					: string.Empty;
-
-				if (string.IsNullOrWhiteSpace(listInput))
-				{
-					Console.Write("Try again. ");
-				}
-			}
-
-			var intInput = -1;
-			while (intInput < 0)
-			{
-				Console.WriteLine("Enter a size for the array. example: 10");
-				//A simple if/else assignment block would do.... but I was having fun with turnaries :)
-				intInput = int.TryParse(Console.ReadLine(), out int outIntInput) ? outIntInput > -1 ? outIntInput : -1 : -1;
-
-				if (intInput < 0)
-				{
-					Console.Write("Try again. ");
-				}
+				Console.WriteLine("Exception: " + ex);
 			}
 		}
 
-		public List<int> GetInOrderList(int size)
+		//Returns a list that is in order
+		public int[] GetInOrder(int size)
 		{
-			List<int> list = new List<int>();
-			var i = 0;
+			int[] array = new int[size];
 
-			while (i < size)
-			{
-				list.Add(i);
-				i++;
-			}
-
-			return list;
-		}
-
-		public int[] GetInOrderArray(int size)
-		{
-			int[] array = new int[size - 1];
-
-			for (var i = 0; i < 51; i++)
+			for (var i = 0; i < size; i++)
 			{
 				array[i] = i;
 			}
@@ -100,19 +52,81 @@ namespace Sorts
 			return array;
 		}
 
-		//Might not use
-		public BigInteger[] GetInOrderBigArray(BigInteger size)
+		//Returns a list that is in order but reversed
+		public int[] GetReverseOrder(int size)
 		{
-			BigInteger[] bigIntegerArray = new BigInteger[]
-			{
-				1000000,
-				2000000,
-				3000000,
-				4000000,
-				5000000
-			};
+			int[] array = new int[size];
 
-			return bigIntegerArray;
+			for (var i = size; i > 0; i--)
+			{
+				array[i - 1] = size - i;
+			}
+
+			return array;
 		}
+
+		//Returns a random set of data for the given size
+		public int[] GetRandom(int size)
+		{
+			int[] array = new int[size];
+
+			for (var i = 0; i < size; i++)
+			{
+				array[i] = new Random().Next();
+			}
+
+			return array;
+		}
+
+		//Same as the GetRandom, but half of the data is the number 42
+		public int[] GetRandomManyDuplicates(int size)
+		{
+			int[] array = new int[size];
+
+			for (var i = 0; i < size; i++)
+			{
+				//Half of the results will come back as 42
+				if (i % 2 == 0)
+				{
+					array[i] = 42;
+				}
+				else
+				{
+					array[i] = new Random().Next();
+				}
+			}
+
+			return array;
+		}
+
+		//Prob don't need this....
+		//public List<int> GetInOrderList(int size)
+		//{
+		//	List<int> list = new List<int>();
+		//	var i = 0;
+
+		//	while (i < size)
+		//	{
+		//		list.Add(i);
+		//		i++;
+		//	}
+
+		//	return list;
+		//}
+
+		//Might not use
+		//public BigInteger[] GetInOrderBigArray(BigInteger size)
+		//{
+		//	BigInteger[] bigIntegerArray = new BigInteger[]
+		//	{
+		//		1000000,
+		//		2000000,
+		//		3000000,
+		//		4000000,
+		//		5000000
+		//	};
+
+		//	return bigIntegerArray;
+		//}
 	}
 }
