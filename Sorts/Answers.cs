@@ -8,6 +8,7 @@ namespace Sorts
 		ReverseOrder,
 		Random,
 		RandomManyDuplicates,
+		AllDuplicate,
 		Error
 	}
 
@@ -43,6 +44,7 @@ namespace Sorts
 					: typeInput.Equals(nameof(InputTypes.ReverseOrder), StringComparison.OrdinalIgnoreCase) || typeInput == "2" ? InputTypes.ReverseOrder
 					: typeInput.Equals(nameof(InputTypes.Random), StringComparison.OrdinalIgnoreCase) || typeInput == "3" ? InputTypes.Random
 					: typeInput.Equals(nameof(InputTypes.RandomManyDuplicates), StringComparison.OrdinalIgnoreCase) || typeInput == "4" ? InputTypes.RandomManyDuplicates
+					: typeInput.Equals(nameof(InputTypes.AllDuplicate), StringComparison.OrdinalIgnoreCase) || typeInput == "5" ? InputTypes.AllDuplicate
 					: InputTypes.Error;
 
 				if (typeEnumInput == InputTypes.Error)
@@ -56,11 +58,11 @@ namespace Sorts
 			var listInput = string.Empty;
 			while (string.IsNullOrWhiteSpace(listInput))
 			{
-				Console.WriteLine("Do you want a List or an Array? List/Array \n");
+				Console.WriteLine("Do you want to run QuickSort or MergeSort? Merge/Quick \n");
 				listInput = Console.ReadLine();
 
-				listInput = listInput.Equals("List", StringComparison.OrdinalIgnoreCase) ? "List"
-					: listInput.Equals("Array", StringComparison.OrdinalIgnoreCase) ? "Array"
+				listInput = listInput.Equals("Merge", StringComparison.OrdinalIgnoreCase) ? "Merge"
+					: listInput.Equals("Quick", StringComparison.OrdinalIgnoreCase) ? "Quick"
 					: string.Empty;
 
 				if (string.IsNullOrWhiteSpace(listInput))

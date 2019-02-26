@@ -1,111 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 
 namespace Sorts
 {
 	class MergeSort
     {
-		public List<int> ResultList;
 		public TimeSpan ResultTime;
 
 		//Sets up the Properties for the MergeSort object
-		public void RunMergeSort(SetupLists setup)
+		public int[] RunMergeSort(SetupLists setup)
 		{
-			if (setup.isArray)
-			{
-				//Start time here
-				var startTime = DateTime.Now;
-				var result = TopDownMergeSort(setup.currentArray);
-				var endTime = DateTime.Now - startTime;
-				//End time here
+			//Start time here
+			var startTime = DateTime.Now;
+			var result = TopDownMergeSort(setup.currentArray);
+			var endTime = DateTime.Now - startTime;
+			//End time here
 
-				ResultList = result.ToList();
-				ResultTime = endTime;
-			}
-			else
-			{
-				var turnToList = setup.currentArray.ToList();
-				//Start time here
-				var startTime = DateTime.Now;
-				var result = TopDownMergeSort(turnToList);
-				var endTime = DateTime.Now - startTime;
-				//End time here
+			ResultTime = endTime;
 
-				ResultList = result;
-				ResultTime = endTime;
-			}
-		}
-
-		//Using a list and merge sorting it.
-		public List<int> TopDownMergeSort(List<int> list)
-		{
-			if (list.Count <= 1)
-			{
-				//There is one/no item in this list.
-				return list;
-			}
-
-			var leftSide = new List<int>();
-			var rightSide = new List<int>();
-
-			//Split the list to two smaller lists
-			foreach (var item in list.Select((value, index) => new { index, value }))
-			{
-				if (item.index < (list.Count() / 2))
-				{
-					leftSide.Add(item.value);
-				}
-				else
-				{
-					rightSide.Add(item.value);
-				}
-			}
-
-			//Recursively keep splitting the smaller lists
-			leftSide = TopDownMergeSort(leftSide);
-			rightSide = TopDownMergeSort(rightSide);
-
-			//Merge each iteration
-			return Merge(leftSide, rightSide);
-		}
-
-		//Merge function for the list mergesort
-		public List<int> Merge(List<int> firstList, List<int> secondList)
-		{
-			var finalList = new List<int>();
-
-			//Compare the first element is each list and the lowest to the new list
-			while (firstList.Count > 0 && secondList.Count > 0)
-			{
-				if (firstList.First() <= secondList.First())
-				{
-					finalList.Add(firstList.First());
-					firstList.Remove(firstList.First());
-				}
-				else
-				{
-					finalList.Add(secondList.First());
-					secondList.Remove(secondList.First());
-				}
-			}
-
-			//Any left over from the first list means it was a bigger array
-			while (firstList.Count > 0)
-			{
-				finalList.Add(firstList.First());
-				firstList.Remove(firstList.First());
-			}
-
-			//Any left over from the second list means it was a bigger array
-			while (secondList.Count > 0)
-			{
-				finalList.Add(secondList.First());
-				secondList.Remove(secondList.First());
-			}
-
-			return finalList;
+			return result;
 		}
 
 		//Merge sort but using an array of ints. So we can test really small numbers

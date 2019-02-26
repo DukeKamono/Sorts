@@ -20,13 +20,13 @@ namespace Sorts
 				setup.Setup(answers);
 
 				//Update the MergeSort Object with the values from the SetupLists object
-				mergeSort.RunMergeSort(setup);
+				var result = mergeSort.RunMergeSort(setup);
 				Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
 				Console.WriteLine("Results:");
 
 				resultList.Add($"Time: {mergeSort.ResultTime}");
 				resultList.Add("Results:");
-				foreach (var number in mergeSort.ResultList)
+				foreach (var number in result)
 				{
 					resultList.Add(number.ToString());
 					Console.WriteLine(number);
