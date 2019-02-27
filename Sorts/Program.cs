@@ -19,12 +19,27 @@ namespace Sorts
 				//Takes the answers to get the right list.
 				setup.Setup(answers);
 
-				//Update the MergeSort Object with the values from the SetupLists object
-				var result = mergeSort.RunMergeSort(setup);
-				Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
-				Console.WriteLine("Results:");
+				var result = new int[answers.InputSize];
 
-				resultList.Add($"Time: {mergeSort.ResultTime}");
+				if (answers.InputList == "Quick")
+				{
+					for (var i = 0; i < answers.InputRepeat; i++)
+					{
+						//Quick sort stuff here
+					}
+				}
+				else
+				{
+					for (var i = 0; i < answers.InputRepeat; i++)
+					{
+						//Update the MergeSort Object with the values from the SetupLists object
+						result = mergeSort.RunMergeSort(setup);
+						Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
+						resultList.Add($"Time: {mergeSort.ResultTime}");
+					}
+				}
+
+				Console.WriteLine("Results:");
 				resultList.Add("Results:");
 				foreach (var number in result)
 				{

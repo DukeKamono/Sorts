@@ -17,6 +17,7 @@ namespace Sorts
 		public InputTypes InputTypes;
 		public string InputList;
 		public int InputSize;
+		public int InputRepeat;
 
 		//Asks the user questions to get answers from.
 		public void Questions()
@@ -87,6 +88,21 @@ namespace Sorts
 			}
 
 			InputSize = intInput;
+
+			var intRepeat = -1;
+			while (intRepeat < 0)
+			{
+				Console.WriteLine("How many interations? example: 10 \n");
+				//A simple if/else assignment block would do.... but I was having fun with turnaries :)
+				intRepeat = int.TryParse(Console.ReadLine(), out int outIntInput) ? outIntInput > -1 ? outIntInput : -1 : -1;
+
+				if (intRepeat < 0)
+				{
+					Console.Write("Try again. ");
+				}
+			}
+
+			InputRepeat = intRepeat;
 		}
 	}
 }
