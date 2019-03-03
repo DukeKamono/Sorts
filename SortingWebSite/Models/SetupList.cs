@@ -7,38 +7,55 @@ namespace SortingWebSite.Models
 {
     public class SetupList
     {
+		public enum InputTypes
+		{
+			InOrder,
+			ReverseOrder,
+			Random,
+			RandomManyDuplicates,
+			AllDuplicate,
+			Error
+		}
+
 		public int[] currentArray;
 
-		//public void Setup(Answers answers)
-		//{
-		//	try
-		//	{
-		//		switch (answers.InputTypes)
-		//		{
-		//			case InputTypes.InOrder:
-		//				currentArray = GetInOrder(answers.InputSize);
-		//				break;
-		//			case InputTypes.ReverseOrder:
-		//				currentArray = GetReverseOrder(answers.InputSize);
-		//				break;
-		//			case InputTypes.Random:
-		//				currentArray = GetRandom(answers.InputSize);
-		//				break;
-		//			case InputTypes.RandomManyDuplicates:
-		//				currentArray = GetRandomManyDuplicates(answers.InputSize);
-		//				break;
-		//			case InputTypes.AllDuplicate:
-		//				currentArray = GetAllDuplicate(answers.InputSize);
-		//				break;
-		//			default:
-		//				throw new Exception("Answer input is wrong.");
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Console.WriteLine("Exception: " + ex);
-		//	}
-		//}
+		public void Setup(string typeInput, int inputSize)
+		{
+			var inputTypes = typeInput.Equals(nameof(InputTypes.InOrder), StringComparison.OrdinalIgnoreCase) || typeInput == "1" ? InputTypes.InOrder
+					: typeInput.Equals(nameof(InputTypes.ReverseOrder), StringComparison.OrdinalIgnoreCase) || typeInput == "2" ? InputTypes.ReverseOrder
+					: typeInput.Equals(nameof(InputTypes.Random), StringComparison.OrdinalIgnoreCase) || typeInput == "3" ? InputTypes.Random
+					: typeInput.Equals(nameof(InputTypes.RandomManyDuplicates), StringComparison.OrdinalIgnoreCase) || typeInput == "4" ? InputTypes.RandomManyDuplicates
+					: typeInput.Equals(nameof(InputTypes.AllDuplicate), StringComparison.OrdinalIgnoreCase) || typeInput == "5" ? InputTypes.AllDuplicate
+					: InputTypes.Error;
+
+			try
+			{
+				switch (inputTypes)
+				{
+					case InputTypes.InOrder:
+						currentArray = GetInOrder(inputSize);
+						break;
+					case InputTypes.ReverseOrder:
+						currentArray = GetReverseOrder(inputSize);
+						break;
+					case InputTypes.Random:
+						currentArray = GetRandom(inputSize);
+						break;
+					case InputTypes.RandomManyDuplicates:
+						currentArray = GetRandomManyDuplicates(inputSize);
+						break;
+					case InputTypes.AllDuplicate:
+						currentArray = GetAllDuplicate(inputSize);
+						break;
+					default:
+						throw new Exception("Answer input is wrong.");
+				}
+			}
+			catch (Exception ex)
+			{
+				//Console.WriteLine("Exception: " + ex);
+			}
+		}
 
 		//Returns a array that is in order
 		public int[] GetInOrder(int size)

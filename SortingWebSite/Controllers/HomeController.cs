@@ -31,7 +31,13 @@ namespace SortingWebSite.Controllers
             return View(model);
         }
 
-        public IActionResult Error()
+		public string GetMergeSort(int id)
+		{
+			return "Pie";
+		}
+
+
+		public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
