@@ -31,9 +31,16 @@ namespace SortingWebSite.Controllers
             return View(model);
         }
 
-		public string GetMergeSort(int id)
+		public SortAnswer GetMergeSort(string inputType, int inputSize)
 		{
-			return "Pie";
+			SetupList setup = new SetupList();
+			setup.Setup(inputType, inputSize);
+
+			var merge = new MergeSort();
+
+			var result = new SortAnswer(merge.ResultTime.TotalMilliseconds, setup.currentArray, merge.RunMergeSort(setup));
+
+			return result;
 		}
 
 

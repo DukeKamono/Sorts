@@ -5,11 +5,19 @@
 <div class="row">
 	<h2>@ViewData["Title"]</h2>
 	<h3>@ViewData["Message"]</h3>
-	<p>@Model.ResultTime</p>
-	<p>Use this area to provide additional information.</p>
+	<p id="ResultTime">Time Here.</p>
+	<p id="BegginingArray">Beggining Array</p>
+	<p id="SortedArray">Starting Array</p>
 
-
-	<input type="radio" />
-	<button clas="button" onclick="GetMergeSort('1')">click me</button>
-	<div id="test"></div>
+	@foreach (var input in Enum.GetValues(typeof(SetupList.InputTypes)))
+	{
+		if (!input.Equals(SetupList.InputTypes.Error))
+		{
+			<label><input type="radio" value="@input" name="radioButtons" />@input</label>
+			<br />
+		}
+	}
+	<input type="text" placeholder="Size of List (ex. 15)" name="listSize" />
+	<button clas="button" onclick="GetMergeSort()">Click Me!</button>
+	<p id="Error" style="display: none;"></p>
 </div>
