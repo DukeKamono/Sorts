@@ -5,9 +5,6 @@
 <div class="row">
 	<h2>@ViewData["Title"]</h2>
 	<h3>@ViewData["Message"]</h3>
-	<p id="ResultTime">Time Here.</p>
-	<p id="BegginingArray">Beggining Array</p>
-	<p id="SortedArray">Starting Array</p>
 
 	@foreach (var input in Enum.GetValues(typeof(SetupList.InputTypes)))
 	{
@@ -18,6 +15,18 @@
 		}
 	}
 	<input type="text" placeholder="Size of List (ex. 15)" name="listSize" />
+	<input type="text" placeholder="Number of Iterations (ex. 15)" name="iterations" />
 	<button clas="button" onclick="GetMergeSort()">Click Me!</button>
-	<p id="Error" style="display: none;"></p>
+	<button clas="button" onclick="Clear()">Clear Results</button>
+	<p id="Error" style="display: none;">Select a Input Type</p>
+
+	<div id="ResultTime">
+		<p>Time Here:</p>
+	</div>
+	<div id="BegginingArray">
+		<p>Beggining Array:</p>
+	</div>
+	<div id="SortedArray">
+		<p>Sorted Array:</p>
+	</div>
 </div>

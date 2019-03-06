@@ -7,11 +7,11 @@ namespace SortingWebSite.Models
 {
     public class SortAnswer
     {
-		public double ResultTime;
+		public TimeSpan ResultTime;
 		public int[] BegginingArray;
 		public int[] SortedArray;
 
-		public SortAnswer(double resultTime, int[] begginingArray, int[] sortedArray)
+		public SortAnswer(TimeSpan resultTime, int[] begginingArray, int[] sortedArray)
 		{
 			ResultTime = resultTime;
 			BegginingArray = begginingArray;

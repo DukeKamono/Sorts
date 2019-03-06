@@ -17,32 +17,55 @@ namespace SortingWebSite.Controllers
 
         public IActionResult QuickSort()
         {
-            ViewData["Message"] = "Quick Sort";
+            ViewData["Message"] = "Select a button to run Quick Sort!";
 
             return View();
         }
 
         public IActionResult MergeSort()
         {
-            ViewData["Message"] = "Select a button to run merge sort!";
+            ViewData["Message"] = "Select a button to run Merge Sort!";
 
 			var model = new MergeSort();
 
             return View(model);
         }
 
-		public SortAnswer GetMergeSort(string inputType, int inputSize)
+		//Serialize this data.
+		public List<SortAnswer> GetMergeSort(string inputType, int inputSize, int repeatAmount)
 		{
-			SetupList setup = new SetupList();
-			setup.Setup(inputType, inputSize);
+			var result = new List<SortAnswer>();
+			for (var i = 0; i < repeatAmount; i++)
+			{
+				SetupList setup = new SetupList();
+				setup.Setup(inputType, inputSize);
 
-			var merge = new MergeSort();
-
-			var result = new SortAnswer(merge.ResultTime.TotalMilliseconds, setup.currentArray, merge.RunMergeSort(setup));
+				var merge = new MergeSort();
+				var list = merge.RunMergeSort(setup);
+				
+				result.Add(new SortAnswer(merge.ResultTime, setup.currentArray, list));
+			}
 
 			return result;
 		}
 
+		//Should combine later with the other sort function or something
+		public List<SortAnswer> GetQuickSort(string inputType, int inputSize, int repeatAmount)
+		{
+			var result = new List<SortAnswer>();
+			//for (var i = 0; i < repeatAmount; i++)
+			//{
+			//	SetupList setup = new SetupList();
+			//	setup.Setup(inputType, inputSize);
+
+			//	var merge = new QuickSort();
+			//	var list = merge.RunQuickSort(setup);
+
+			//	result.Add(new SortAnswer(merge.ResultTime, setup.currentArray, list));
+			//}
+
+			return result;
+		}
 
 		public IActionResult Error()
         {
