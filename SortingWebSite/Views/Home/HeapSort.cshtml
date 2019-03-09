@@ -1,0 +1,32 @@
+﻿@{
+	ViewData["Title"] = "Heap Sort";
+}
+
+<div class="row">
+	<h2>@ViewData["Title"]</h2>
+	<h3>@ViewData["Message"]</h3>
+
+	@foreach (var input in Enum.GetValues(typeof(SetupList.InputTypes)))
+	{
+		if (!input.Equals(SetupList.InputTypes.Error))
+		{
+			<label><input type="radio" value="@input" name="radioButtons" />@input</label>
+			<br />
+		}
+	}
+	<input type="text" placeholder="Size of List (ex. 15)" name="listSize" />
+	<input type="text" placeholder="Number of Iterations (ex. 15)" name="iterations" />
+	<button clas="button" onclick="GetHeapSort()">Click Me!</button>
+	<button clas="button" onclick="Clear()">Clear Results</button>
+	<p id="Error" style="display: none;">Select a Input Type</p>
+
+	<div id="ResultTime">
+		<p>Time Here:</p>
+	</div>
+	<div id="BegginingArray">
+		<p>Beggining Array:</p>
+	</div>
+	<div id="SortedArray">
+		<p>Sorted Array:</p>
+	</div>
+</div>

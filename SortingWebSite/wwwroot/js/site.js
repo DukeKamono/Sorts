@@ -20,9 +20,8 @@
 
 				$("#Error").css("display", "none");
 			},
-			error: function (ex) {
-				alert(ex);
-				$("#Error").html(data);
+			error: function () {
+				$("#Error").html("Something went wrong! Try again.");
 				$("#Error").css("display", "block");
 				$("#Error").css("color", "red");
 				//Error handling
@@ -59,9 +58,45 @@ function GetQuickSort() {
 
 				$("#Error").css("display", "none");
 			},
-			error: function (ex) {
-				alert(ex);
-				$("#Error").html(data);
+			error: function () {
+				$("#Error").html("Something went wrong! Try again.");
+				$("#Error").css("display", "block");
+				$("#Error").css("color", "red");
+				//Error handling
+			}
+		});
+	}
+	else {
+		$("#Error").css("display", "block");
+		$("#Error").css("color", "red");
+	}
+}
+
+function GetHeapSort() {
+
+	var radio = document.querySelector('input[name="radioButtons"]:checked');
+	var size = document.querySelector('input[name="listSize"]');
+	var iterations = document.querySelector('input[name="iterations"]');
+
+	if (radio) {
+		$.ajax({
+			url: "/Home/GetHeapSort",
+			type: "get",
+			data: {
+				"inputType": radio.value, "inputSize": size.value, "repeatAmount": iterations.value
+			},
+			success: function (data) {
+				var randomColor = GetRandomColor();
+				data.forEach(function (e) {
+					$("#ResultTime").append("<p style=\"color: " + randomColor + "\">" + e.resultTime + "</p>");
+					$("#SortedArray").append("<p style=\"color: " + randomColor + "\">" + e.sortedArray + "</p>");
+					$("#BegginingArray").append("<p style=\"color: " + randomColor + "\">" + e.begginingArray + "</p>");
+				});
+
+				$("#Error").css("display", "none");
+			},
+			error: function () {
+				$("#Error").html("Something went wrong! Try again.");
 				$("#Error").css("display", "block");
 				$("#Error").css("color", "red");
 				//Error handling
