@@ -66,18 +66,17 @@ namespace Sorts
                 }
 
                 if (left < right)
-                {
-                    //If the the elements are equal at these positions, return right
-                    if (array[left] == array[right])
-                    {
-                        return right;
-                    }
-
+                {      
                     //Perform a swap here
                     int temp = array[left];
                     array[left] = array[right];
                     array[right] = temp;
 
+                    //Duplicate encountered, so move the left side up
+                    if(array[left] == array[right])
+                    {
+                        left++;
+                    }
 
                 }
                 else
