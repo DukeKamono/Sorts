@@ -64,9 +64,13 @@ namespace SortingWebSite.Controllers
 				setup.Setup(inputType, inputSize);
 
 				var merge = new QuickSort();
-				var list = merge.RunQuickSort(setup);
 
-				result.Add(new SortAnswer(merge.ResultTime, setup.currentArray, list));
+				//This quicksort messes with the acutal data like a sort function should. it does not return a new int[]
+				//So I am making a copy of the currentArray before messing with its data.
+				int[] list = (int[])setup.currentArray.Clone();
+				merge.RunQuickSort(setup);
+
+				result.Add(new SortAnswer(merge.ResultTime, list, setup.currentArray));
 			}
 
 			return result;

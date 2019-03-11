@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SortingWebSite.Models
 {
-    public class HeapSort
+	public class HeapSort
     {
 		public TimeSpan ResultTime;
 
