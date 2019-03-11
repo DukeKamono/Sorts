@@ -58,16 +58,16 @@ namespace SortingWebSite.Controllers
 		public List<SortAnswer> GetQuickSort(string inputType, int inputSize, int repeatAmount)
 		{
 			var result = new List<SortAnswer>();
-			//for (var i = 0; i < repeatAmount; i++)
-			//{
-			//	SetupList setup = new SetupList();
-			//	setup.Setup(inputType, inputSize);
+			for (var i = 0; i < repeatAmount; i++)
+			{
+				SetupList setup = new SetupList();
+				setup.Setup(inputType, inputSize);
 
-			//	var merge = new QuickSort();
-			//	var list = merge.RunQuickSort(setup);
+				var merge = new QuickSort();
+				var list = merge.RunQuickSort(setup);
 
-			//	result.Add(new SortAnswer(merge.ResultTime, setup.currentArray, list));
-			//}
+				result.Add(new SortAnswer(merge.ResultTime, setup.currentArray, list));
+			}
 
 			return result;
 		}
