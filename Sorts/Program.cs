@@ -8,6 +8,7 @@ namespace Sorts
 		static void Main(string[] args)
 		{
 			MergeSort mergeSort = new MergeSort();
+            QuickSort quickSort = new QuickSort();
 			SetupLists setup = new SetupLists();
 			Answers answers = new Answers();
 			var resultList = new List<string>();
@@ -23,10 +24,20 @@ namespace Sorts
 
 				if (answers.InputList == "Quick")
 				{
-					for (var i = 0; i < answers.InputRepeat; i++)
-					{
-						//Quick sort stuff here
-					}
+                    for (var i = 0; i < answers.InputRepeat; i++)
+                    {
+                        //Quick sort stuff here
+                        if (setup.currentArray.Length <= 1)
+                        {
+                            result = setup.currentArray;
+                        }
+                        else
+                        {
+                            result = quickSort.RunQuickSort(setup);
+                        }
+                        Console.WriteLine($"\nTime: {quickSort.ResultTime}");
+                        resultList.Add($"Time: {quickSort.ResultTime}");
+                    }
 				}
 				else
 				{
