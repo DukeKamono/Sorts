@@ -12,7 +12,7 @@ namespace Sorts
             //Start time here
             var startTime = DateTime.Now;
             var left = 0;
-            var right = setup.currentArray[setup.currentArray.Length-1];
+            var right = setup.currentArray.Length-1; //The last index     
             var result = HoareQuickSort(setup.currentArray, left, right);
             var endTime = DateTime.Now - startTime;
             //End time here
@@ -26,8 +26,9 @@ namespace Sorts
         //Then takes the element after it and the last element and compares them to the pivot
         public int[] HoareQuickSort(int[] array, int left, int right)
         {
+            
             //If the left element is less than the right element...
-            if(left < right)
+            if (left < right)
             {
                 //Partition the array
                 var pivot = Partition(array, left, right);
@@ -47,17 +48,18 @@ namespace Sorts
 
         public int Partition(int[] array, int left, int right)
         {
-            //Make the pivot the median
+            //Make the pivot the first element
             var pivot = array[left];
 
             while (true)
             {
-
+                //Keep moving the left side up until >= pivot
                 while (array[left] < pivot)
                 {
                     left++;
                 }
 
+                //Keep moving the right side down until <= pivot
                 while (array[right] > pivot)
                 {
                     right--;
@@ -65,6 +67,7 @@ namespace Sorts
 
                 if (left < right)
                 {
+                    //If the the elements are equal at these positions, return right
                     if (array[left] == array[right])
                     {
                         return right;
