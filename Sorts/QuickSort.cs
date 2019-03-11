@@ -13,18 +13,18 @@ namespace Sorts
             var startTime = DateTime.Now;
             var left = 0;
             var right = setup.currentArray.Length-1; //The last index     
-            var result = HoareQuickSort(setup.currentArray, left, right);
+            HoareQuickSort(setup.currentArray, left, right);
             var endTime = DateTime.Now - startTime;
             //End time here
 
             ResultTime = endTime;
 
-            return result;
+            return setup.currentArray;
         }
 
         //Quicksort using Hoare's algorithm. Takes an array, using the first element as the pivot
         //Then takes the element after it and the last element and compares them to the pivot
-        public int[] HoareQuickSort(int[] array, int left, int right)
+        public void HoareQuickSort(int[] array, int left, int right)
         {
             
             //If the left element is less than the right element...
@@ -35,15 +35,14 @@ namespace Sorts
 
                 if (pivot > 1)
                 {
-                    return HoareQuickSort(array, left, pivot - 1);
+                    HoareQuickSort(array, left, pivot - 1);
                 }
                 if (pivot + 1 < right)
                 {
-                    return HoareQuickSort(array, pivot + 1, right);
+                    HoareQuickSort(array, pivot + 1, right);
                 }
 
             }
-            return array;
         }
 
         public int Partition(int[] array, int left, int right)
@@ -77,6 +76,7 @@ namespace Sorts
                     {
                         left++;
                     }
+
 
                 }
                 else
