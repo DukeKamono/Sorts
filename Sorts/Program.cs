@@ -9,6 +9,7 @@ namespace Sorts
 		{
 			MergeSort mergeSort = new MergeSort();
             QuickSort quickSort = new QuickSort();
+			HeapSort heapSort = new HeapSort();
 			SetupLists setup = new SetupLists();
 			Answers answers = new Answers();
 			var resultList = new List<string>();
@@ -39,7 +40,7 @@ namespace Sorts
                         resultList.Add($"Time: {quickSort.ResultTime}");
                     }
 				}
-				else
+				else if (answers.InputList == "Merge")
 				{
 					for (var i = 0; i < answers.InputRepeat; i++)
 					{
@@ -47,6 +48,23 @@ namespace Sorts
 						result = mergeSort.RunMergeSort(setup);
 						Console.WriteLine($"\nTime: {mergeSort.ResultTime}");
 						resultList.Add($"Time: {mergeSort.ResultTime}");
+					}
+				}
+				else
+				{
+					for (var i = 0; i < answers.InputRepeat; i++)
+					{
+						//Heap sort stuff here
+						if (setup.currentArray.Length <= 1)
+						{
+							result = setup.currentArray;
+						}
+						else
+						{
+							result = heapSort.RunHeapSort(setup);
+						}
+						Console.WriteLine($"\nTime: {heapSort.ResultTime}");
+						resultList.Add($"Time: {heapSort.ResultTime}");
 					}
 				}
 
