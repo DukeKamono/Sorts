@@ -55,26 +55,19 @@ namespace Sorts
 					for (var i = 0; i < answers.InputRepeat; i++)
 					{
 						//Heap sort stuff here
-						if (setup.currentArray.Length <= 1)
-						{
-							result = setup.currentArray;
-						}
-						else
-						{
-							result = heapSort.RunHeapSort(setup);
-						}
+						result = heapSort.RunHeapSort(setup);
 						Console.WriteLine($"\nTime: {heapSort.ResultTime}");
 						resultList.Add($"Time: {heapSort.ResultTime}");
 					}
 				}
 
-				Console.WriteLine("Results:");
-				resultList.Add("Results:");
-				foreach (var number in result)
-				{
-					resultList.Add(number.ToString());
-					Console.WriteLine(number);
-				}
+				//Console.WriteLine("Results:");
+				//resultList.Add("Results:");
+				//foreach (var number in result)
+				//{
+				//	resultList.Add(number.ToString());
+				//	Console.WriteLine(number);
+				//}
 
 				//Save to file Sorts\bin\Debug
 				var FilePath = @"..\Results" + DateTime.Now.ToString("yyyyddM--HH-mm-ss") + ".txt";

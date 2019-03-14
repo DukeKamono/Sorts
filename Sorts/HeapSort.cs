@@ -9,15 +9,16 @@ namespace Sorts
 		//Sets up the Properties for the HeapSort object
 		public int[] RunHeapSort(SetupLists setup)
 		{
+			int[] list = (int[])setup.currentArray.Clone();
 			//Start time here
 			var startTime = DateTime.Now;
-			HeapSortSiftDown(setup.currentArray, setup.currentArray.Length);
+			HeapSortSiftDown(list, list.Length);
 			var endTime = DateTime.Now - startTime;
 			//End time here
 
 			ResultTime = endTime;
 
-			return setup.currentArray;
+			return list;
 		}
 
 		//Heap Sort using an array of ints.
