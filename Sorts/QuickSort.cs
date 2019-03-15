@@ -6,20 +6,22 @@ namespace Sorts
     {
         public TimeSpan ResultTime;
 
-        //Sets up the Properties for the MergeSort object
+        //Sets up the Properties for the QuickSort object
         public int[] RunQuickSort(SetupLists setup)
         {
-            //Start time here
-            var startTime = DateTime.Now;
+			int[] list = (int[])setup.currentArray.Clone();
             var left = 0;
-            var right = setup.currentArray.Length-1; //The last index     
-            HoareQuickSort(setup.currentArray, left, right);
+            var right = list.Length-1; //The last index
+
+			//Start time here
+			var startTime = DateTime.Now;
+			HoareQuickSort(list, left, right);
             var endTime = DateTime.Now - startTime;
             //End time here
 
             ResultTime = endTime;
 
-            return setup.currentArray;
+            return list;
         }
 
         //Quicksort using Hoare's algorithm. Takes an array, using the first element as the pivot
@@ -33,60 +35,43 @@ namespace Sorts
                 //Partition the array
                 var pivot = Partition(array, left, right);
 
-                if (pivot > 1)
-                {
-                    HoareQuickSort(array, left, pivot - 1);
-                }
-                if (pivot + 1 < right)
-                {
-                    HoareQuickSort(array, pivot + 1, right);
-                }
-
+				HoareQuickSort(array, left, pivot);
+				HoareQuickSort(array, pivot + 1, right);
             }
         }
 
         public int Partition(int[] array, int left, int right)
         {
             //Make the pivot the first element
-            var pivot = array[left];
+            var pivot = array[(left + right) / 2];
+			var i = left - 1;
+			var j = right + 1;
 
             while (true)
             {
-                //Keep moving the left side up until >= pivot
-                while (array[left] < pivot)
-                {
-                    left++;
-                }
+				//Keep moving the left side up until < pivot
+				do
+				{
+					i++;
+				}
+				while (array[i] < pivot);
 
-                //Keep moving the right side down until <= pivot
-                while (array[right] > pivot)
-                {
-                    right--;
-                }
+				//Keep moving the right side down until > pivot
+				do
+				{
+					j--;
+				}
+				while (array[j] > pivot);
+					
+				if (i >= j)
+				{
+					return j;
+				}
 
-                if (left < right)
-                {      
-                    //Perform a swap here
-                    int temp = array[left];
-                    array[left] = array[right];
-                    array[right] = temp;
-
-                    //Duplicate encountered, so move the left side up
-                    if(array[left] == array[right])
-                    {
-                        left++;
-                    }
-
-
-                }
-                else
-                {
-                    return right;
-                }
+				var temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
             }
-        
         }
     }
-
-    
 }

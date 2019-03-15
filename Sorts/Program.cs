@@ -28,14 +28,7 @@ namespace Sorts
                     for (var i = 0; i < answers.InputRepeat; i++)
                     {
                         //Quick sort stuff here
-                        if (setup.currentArray.Length <= 1)
-                        {
-                            result = setup.currentArray;
-                        }
-                        else
-                        {
-                            result = quickSort.RunQuickSort(setup);
-                        }
+                        result = quickSort.RunQuickSort(setup);
                         Console.WriteLine($"\nTime: {quickSort.ResultTime}");
                         resultList.Add($"Time: {quickSort.ResultTime}");
                     }
