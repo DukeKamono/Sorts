@@ -43,12 +43,19 @@ namespace Sorts
         public int Partition(int[] array, int left, int right)
         {
             //Make the pivot the first element
-            var pivot = array[(left + right) / 2];
+            var pivot = array[left];
 			var i = left - 1;
 			var j = right + 1;
 
             while (true)
             {
+				//Keep moving the right side down until > pivot
+				do
+				{
+					j--;
+				}
+				while (array[j] > pivot);
+
 				//Keep moving the left side up until < pivot
 				do
 				{
@@ -56,13 +63,6 @@ namespace Sorts
 				}
 				while (array[i] < pivot);
 
-				//Keep moving the right side down until > pivot
-				do
-				{
-					j--;
-				}
-				while (array[j] > pivot);
-					
 				if (i >= j)
 				{
 					return j;
