@@ -59,7 +59,7 @@ namespace Sorts
 			var listInput = string.Empty;
 			while (string.IsNullOrWhiteSpace(listInput))
 			{
-				Console.WriteLine("Do you want to run QuickSort or MergeSort? Merge/Quick/Heap \n");
+				Console.WriteLine("Do you want to run MergeSort or QuickSort or HeapSort? Merge/Quick/Heap \n");
 				listInput = Console.ReadLine();
 
 				listInput = listInput.Equals("Merge", StringComparison.OrdinalIgnoreCase) ? "Merge"
