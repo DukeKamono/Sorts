@@ -2,7 +2,7 @@
 
 namespace SortingWebSite.Models
 {
-	class QuickSort
+	public class QuickSort
 	{
 		public TimeSpan ResultTime;
 
